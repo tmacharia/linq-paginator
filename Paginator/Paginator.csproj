@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Timothy Maina</Authors>
+    <Company>Neon Clouds</Company>
+    <Product>Linq Paginator</Product>
+    <PackageProjectUrl>https://github.com/devTimmy/paginator</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/devTimmy/paginator/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>© Neon Clouds, 2017</Copyright>
+    <RepositoryUrl>https://github.com/devTimmy/paginator</RepositoryUrl>
+    <PackageTags>linq, pagination, list paginator</PackageTags>
+    <Description>Retrieve items in a collection in bits by pulling chunks which are in form of pages. Works with huge array of items and only returns items you need.</Description>
+  </PropertyGroup>
+
+</Project>

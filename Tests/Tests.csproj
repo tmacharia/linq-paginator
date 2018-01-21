@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LinqPagination\Paginator\Paginator.csproj" />
+    <ProjectReference Include="..\Paginator\Paginator.csproj" />
   </ItemGroup>
 
 </Project>
