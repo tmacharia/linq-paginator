@@ -1,0 +1,10 @@
+language: csharp
+solution: Paginator.sln
+
+dotnet: 2.0.2
+mono: latest
+
+script:
+  - dotnet restore
+  - dotnet build Paginator
+  - dotnet test Tests

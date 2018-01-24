@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/devTimmy/paginator</RepositoryUrl>
     <PackageTags>linq, pagination, list paginator</PackageTags>
     <Description>Retrieve items in a collection in bits by pulling chunks which are in form of pages. Works with huge array of items and only returns items you need.</Description>
+    <PackageId>LinqPaginator</PackageId>
   </PropertyGroup>
 
 </Project>
