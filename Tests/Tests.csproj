@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Caching\Caching.csproj" />
     <ProjectReference Include="..\Paginator\Paginator.csproj" />
   </ItemGroup>
 

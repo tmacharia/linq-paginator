@@ -1,7 +1,8 @@
 ﻿using Paginator.Models;
 using System;
+using System.Collections.Generic;
 
-namespace Paginator.Caching
+namespace Caching
 {
     /// <summary>
     /// Service that allows caching of repeated pagination requests for easier
@@ -9,6 +10,11 @@ namespace Paginator.Caching
     /// </summary>
     public interface ICachingEngine
     {
+        /// <summary>
+        /// All cache component pointers for the current Caching Engine.
+        /// </summary>
+        HashSet<CacheComponent> CacheComponents { get; }
+
         bool Add<T>(Result<T> result) where T : class;
         bool Add<T>(Request request, Result<T> result) where T : class;
         bool Update<T>(Request request, Result<T> newResult) where T : class;

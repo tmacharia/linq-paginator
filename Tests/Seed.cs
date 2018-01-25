@@ -11,7 +11,7 @@ namespace Tests
         private static Random _rand;
         private static CustomRandom _random;
 
-        private static Random Rand
+        public static Random Random
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Tests
                 }
             }
         }
-        public static CustomRandom Random
+        public static CustomRandom CustomRandom
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Tests
             {
                 Rate rate = new Rate()
                 {
-                    Value = Rand.Next(1, 100)
+                    Value = Random.Next(1, 100)
                 };
                 list.Add(rate);
             }

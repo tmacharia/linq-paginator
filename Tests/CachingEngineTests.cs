@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Caching;
+using NUnit.Framework;
+using Paginator.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +10,19 @@ namespace Tests
     [TestFixture]
     public class CachingEngineTests
     {
-        [TestCase]
-        public void EngineInitialization()
-        {
+        private static ICachingEngine _engine;
 
+        [TestCase]
+        public void MemoryCacheInit()
+        {
+            _engine = new CachingEngine(CacheType.Memory);
+            Assert.NotNull(_engine.CacheComponents);
+        }
+        [TestCase]
+        public void DiskCacheInit()
+        {
+            _engine = new CachingEngine(CacheType.Disk);
+            Assert.IsNotNull(_engine.CacheComponents);
         }
 
         #region Add Component to Cache Test Cases

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Paginator.Models;
+using System;
 
-namespace Paginator.Models
+namespace Caching
 {
     /// <summary>
     /// Logical unit for storing data into cache.
     /// </summary>
-    public class CacheComponent<T>
-        where T : class
+    public class CacheComponent
     {
         // Constructor
         public CacheComponent()
@@ -29,10 +27,10 @@ namespace Paginator.Models
         /// </summary>
         public Request Request { get; set; }
         /// <summary>
-        /// The <see cref="Result{T}"/> object with data generated after pagination
+        /// The object with data generated after pagination
         /// processing that will be returned by caching system.
         /// </summary>
-        public Result<T> Result { get; set; }
+        public object Result { get; set; }
         /// <summary>
         /// The exact date & time that this <see cref="CacheComponent{T}"/> was 
         /// created.

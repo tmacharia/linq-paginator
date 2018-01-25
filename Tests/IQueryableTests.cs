@@ -80,7 +80,7 @@ namespace Tests
         [Test, TestCaseSource(typeof(Seed),"List")]
         public void RequestWithFuncTest(ICollection<Rate> list)
         {
-            int perpage = Seed.Random.Next();
+            int perpage = Seed.CustomRandom.Next();
             int total = Seed.TotalPages(list.Count,perpage);
             
             Request request = new Request()

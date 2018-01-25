@@ -1,4 +1,4 @@
-﻿namespace Paginator.Models
+﻿namespace Caching
 {
     /// <summary>
     /// Storage media to use for caching.
