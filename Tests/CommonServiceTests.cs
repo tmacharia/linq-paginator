@@ -13,13 +13,13 @@ namespace Tests
     {
         private static ICommonService _service;
 
-        [TestCase]
+        [Test, Order(1)]
         public void Constructor()
         {
             _service = new CommonService();
         }
 
-        [TestCase]
+        [Test, Order(2)]
         public void Initialization()
         {
             bool result = _service.Initialize();
@@ -27,7 +27,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestCase]
+        [Test, Order(12)]
         public void FileNotFoundException()
         {
             Assert.Catch<System.IO.FileNotFoundException>(() =>
@@ -36,14 +36,14 @@ namespace Tests
             });
         }
 
-        [TestCase]
+        [Test, Order(7)]
         public void ReadFilenSerialize()
         {
             var rate = _service.Read<Rate>("rates");
 
             Assert.NotNull(rate);
         }
-        [TestCase]
+        [Test, Order(6)]
         public void ReadFileString()
         {
             var rates = _service.Read("rates");
@@ -51,7 +51,7 @@ namespace Tests
             Assert.NotNull(rates);
         }
 
-        [TestCase]
+        [Test, Order(8)]
         public void NullFileNameOnRead()
         {
             Assert.Catch<ArgumentNullException>(() =>
@@ -63,7 +63,7 @@ namespace Tests
                 _service.Read<Rate>(null);
             });
         }
-        [TestCase]
+        [Test, Order(9)]
         public void EntityNullOnWrite()
         {
             Assert.Catch<ArgumentNullException>(() =>
@@ -71,7 +71,7 @@ namespace Tests
                 _service.Write<Rate>(null, "fg");
             });
         }
-        [TestCase]
+        [Test, Order(10)]
         public void FilenameNullInEntityOnWrite()
         {
             Assert.Catch<ArgumentNullException>(() =>
@@ -79,7 +79,7 @@ namespace Tests
                 _service.Write<Rate>(new Rate(), null);
             });
         }
-        [TestCase]
+        [Test, Order(11)]
         public void NullFileNameOnWrite()
         {
             Assert.Catch<ArgumentNullException>(() =>
@@ -88,7 +88,7 @@ namespace Tests
             });
         }
 
-        [TestCase]
+        [Test, Order(3)]
         public void WriteTextToFile()
         {
             bool result = _service.Write("values", "23,45,589,289,and the rest are B.S");
@@ -96,7 +96,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestCase]
+        [Test, Order(4)]
         public void SerializeAndWriteToFile()
         {
             Rate rate = new Rate()
@@ -109,7 +109,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestCase]
+        [Test, Order(5)]
         public void WriteCollectionToFile()
         {
             List<Rate> list = new List<Rate>()
@@ -126,7 +126,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestCase]
+        [Test, Order(13)]
         public void StringToStream()
         {
             string s = "Pitbull - Options ft. Stephen Marley";
@@ -136,7 +136,7 @@ namespace Tests
             Assert.NotNull(res);
         }
 
-        [TestCase]
+        [Test, Order(14)]
         public void ReadFileAsStream()
         {
             var res = _service.ReadAsStream("rates");
@@ -145,7 +145,7 @@ namespace Tests
             Assert.Greater(res.Length, 0);
         }
 
-        [TestCase]
+        [Test, Order(15)]
         public void StreamToString()
         {
             string s = "Pitbull - Options ft. Stephen Marley";

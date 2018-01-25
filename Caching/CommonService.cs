@@ -15,7 +15,7 @@ namespace Caching
 
         public CommonService()
         {
-            _folder = @"LinqPaginator\Caching\";
+            _folder = "LinqPaginator/Caching/";
             _extension = ".json";
         }
         public bool Initialize()
@@ -24,9 +24,7 @@ namespace Caching
 
             if (!Directory.Exists(folder))
             {
-                DirectoryInfo directory = new DirectoryInfo(folder);
-                directory.Attributes = FileAttributes.Hidden;
-                directory.Create();
+                Directory.CreateDirectory(folder);
             }
 
 

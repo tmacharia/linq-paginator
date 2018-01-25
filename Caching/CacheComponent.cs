@@ -21,7 +21,7 @@ namespace Caching
         /// Full namespace & type for the original collection used
         /// during pagination.
         /// </summary>
-        public string CollectionType { get; set; }
+        public Type Type { get; set; }
         /// <summary>
         /// Original <see cref="Request"/> object used to perform pagination.
         /// </summary>

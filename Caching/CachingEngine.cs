@@ -9,6 +9,9 @@ namespace Caching
     public class CachingEngine : ICachingEngine
     {
         #region Private Variables
+        private readonly ICommonService _commonService;
+        private readonly Random _random;
+
         private HashSet<CacheComponent> _memCache;
         private HashSet<CacheComponent> _diskCache;
         private readonly CacheType _cacheType;
@@ -29,6 +32,10 @@ namespace Caching
                 default:
                     break;
             }
+
+            _random = new Random();
+            // Initialize common service
+            _commonService = new CommonService();
         }
 
         public HashSet<CacheComponent> CacheComponents
@@ -50,7 +57,21 @@ namespace Caching
 
         public bool Add<T>(Result<T> result) where T : class
         {
-            throw new NotImplementedException();
+            CacheComponent component = new CacheComponent()
+            {
+                Id = _random.Next(),
+                Type = typeof(T),
+                Request = new Request()
+                {
+                    Page = result.Page,
+                    ItemsPerPage = result.ItemsPerPage
+                },
+                Result = result,
+            };
+
+            AddComponent(component);
+
+            return true;
         }
 
         public bool Add<T>(Request request, Result<T> result) where T : class
@@ -102,5 +123,22 @@ namespace Caching
         {
             throw new NotImplementedException();
         }
+
+        #region Private Section
+        private void AddComponent(CacheComponent component)
+        {
+            if (component == null)
+                throw new ArgumentNullException("Cache Component.", "Component created was null. Unexpected error occured.");
+
+            if(_cacheType == CacheType.Memory)
+            {
+                _memCache.Add(component);
+            }
+            else if(_cacheType == CacheType.Disk)
+            {
+                _diskCache.Add(component);
+            }
+        }
+        #endregion
     }
 }
