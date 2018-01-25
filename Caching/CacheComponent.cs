@@ -23,10 +23,6 @@ namespace Caching
         /// </summary>
         public Type Type { get; set; }
         /// <summary>
-        /// Original <see cref="Request"/> object used to perform pagination.
-        /// </summary>
-        public Request Request { get; set; }
-        /// <summary>
         /// The object with data generated after pagination
         /// processing that will be returned by caching system.
         /// </summary>
@@ -36,5 +32,10 @@ namespace Caching
         /// created.
         /// </summary>
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Timestamp for then a cache component get updated with new
+        /// data.
+        /// </summary>
+        public DateTime? UpdatedTime { get; set; }
     }
 }

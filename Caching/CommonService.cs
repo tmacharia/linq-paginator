@@ -141,6 +141,13 @@ namespace Caching
                 return sr.ReadToEnd();
             }
         }
+        public bool Clear(string filename)
+        {
+
+            ClearFileContents(filename);
+
+            return true;
+        }
 
 
         #region Private Section

@@ -79,5 +79,13 @@ namespace Caching
         /// </param>
         /// <returns>A string in base64</returns>
         string StreamToString(Stream stream);
+        /// <summary>
+        /// Clears the contents of a file.
+        /// </summary>
+        /// <param name="filename">Name of file to clear contents from application storage folder.
+        /// N.B Only use the filename with no extension & not the path to the file.
+        /// </param>
+        /// <returns>A boolean indicating whether the operation was successful.</returns>
+        bool Clear(string filename);
     }
 }
