@@ -41,6 +41,7 @@ namespace Tests
         {
             get
             {
+                yield return new List<Rate>(GenRandomRates(9));
                 yield return new List<Rate>(GenRandomRates(50));
                 //yield return new List<Rate>(GenRandomRates(250));
                 //yield return new List<Rate>(GenRandomRates(537));

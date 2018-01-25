@@ -23,6 +23,16 @@ namespace Tests
         }
 
         [Test, TestCaseSource(typeof(Seed), "List")]
+        public void Empty(ICollection<Rate> Rates)
+        {
+            var result = Rates.ToPaged();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
+        }
+
+        [Test, TestCaseSource(typeof(Seed), "List")]
         public void FuncTest(ICollection<Rate> Rates)
         {
             var result = Rates.ToPaged(x => x.Value > 9, 2, 2);

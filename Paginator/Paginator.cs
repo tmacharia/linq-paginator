@@ -3,8 +3,6 @@ using Paginator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Paginator.Formatters;
 
@@ -26,11 +24,46 @@ namespace Paginator
     /// </summary>
     public static class Paginator
     {
-        // Private Variables
-        private static int _startPage = 0;
+        #region Default Private Variables
+        /// <summary>
+        /// Default start page for pagination in-case no start page is defined.
+        /// </summary>
+        private const int _startPage = 0;
+        /// <summary>
+        /// Default number of items to return per page in-case no value is passed
+        /// by the developer.
+        /// </summary>
         private const int _items_per_page = 10;
+        #endregion
 
         #region IEnumerable Extensions
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="enumerable"><see cref="IEnumerable{T}"/> collection to page.</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
+        public static Result<T> ToPaged<T>(this IEnumerable<T> enumerable)
+            where T : class
+        {
+            Request request = Validate(enumerable, null);
+
+            return Process(enumerable, null, request.Page, request.ItemsPerPage);
+        }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="enumerable"><see cref="IEnumerable{T}"/> collection to page.</param>
+        /// <param name="page">Page number to retreive contents from.</param>
+        /// <param name="itemsPerPage">Number of items to return in every page. e.g 10,20,30 e.t.c</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IEnumerable<T> enumerable, int page, int itemsPerPage)
             where T : class
         {
@@ -38,6 +71,20 @@ namespace Paginator
 
             return Process(enumerable, null, page, itemsPerPage);
         }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="enumerable"><see cref="IEnumerable{T}"/> collection to page.</param>
+        /// <param name="predicate">A lambda expression to filter data from the main
+        /// <see cref="IEnumerable{T}"/> collection.
+        /// </param>
+        /// <param name="page">Page number to retreive contents from.</param>
+        /// <param name="itemsPerPage">Number of items to return in every page. e.g 10,20,30 e.t.c</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IEnumerable<T> enumerable,Func<T,bool> predicate, int page, int itemsPerPage)
             where T : class
         {
@@ -45,6 +92,18 @@ namespace Paginator
 
             return Process(enumerable, predicate, page, itemsPerPage);
         }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="enumerable"><see cref="IEnumerable{T}"/> collection to page.</param>
+        /// <param name="request">A <see cref="Request"/> object describing a pagination
+        /// request with the following options: Page and items per page
+        /// </param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IEnumerable<T> enumerable, Request request)
             where T : class
         {
@@ -52,6 +111,20 @@ namespace Paginator
 
             return Process(enumerable, null, request.Page, request.ItemsPerPage);
         }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="enumerable"><see cref="IEnumerable{T}"/> collection to page.</param>
+        /// <param name="predicate">A lambda expression to filter data from the main
+        /// <see cref="IEnumerable{T}"/> collection.</param>
+        /// <param name="request">A <see cref="Request"/> object describing a pagination
+        /// request with the following options: Page and items per page
+        /// </param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate, Request request)
             where T : class
         {
@@ -61,7 +134,35 @@ namespace Paginator
         }
         #endregion
 
+
         #region IQueryable Extensions
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="queryable"><see cref="IQueryable{T}"/> collection to page.</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
+        public static Result<T> ToPaged<T>(this IQueryable<T> queryable)
+            where T : class
+        {
+            Request request = Validate(queryable, null);
+
+            return Process(queryable, null, request.Page, request.ItemsPerPage);
+        }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="queryable"><see cref="IQueryable{T}"/> collection to page.</param>
+        /// <param name="page">Page number to retreive contents from.</param>
+        /// <param name="itemsPerPage">Number of items to return in every page. e.g 10,20,30 e.t.c</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IQueryable<T> queryable,int page,int itemsPerPage)
             where T : class
         {
@@ -69,6 +170,20 @@ namespace Paginator
 
             return Process(queryable, null, page, itemsPerPage);
         }
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="queryable"><see cref="IQueryable{T}"/> collection to page.</param>
+        /// <param name="predicate">A lambda expression to filter data from the main
+        /// <see cref="IQueryable{T}"/> collection.
+        /// </param>
+        /// <param name="page">Page number to retreive contents from.</param>
+        /// <param name="itemsPerPage">Number of items to return in every page. e.g 10,20,30 e.t.c</param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
         public static Result<T> ToPaged<T>(this IQueryable<T> queryable, Func<T, bool> predicate, int page, int itemsPerPage)
                 where T : class
         {
@@ -76,19 +191,45 @@ namespace Paginator
 
             return Process(queryable, predicate, page, itemsPerPage);
         }
-        public static Result<T> ToPaged<T>(this IQueryable<T> enumerable, Request request)
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="queryable"><see cref="IQueryable{T}"/> collection to page.</param>
+        /// <param name="request">A <see cref="Request"/> object describing a pagination
+        /// request with the following options: Page and items per page
+        /// </param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
+        public static Result<T> ToPaged<T>(this IQueryable<T> queryable, Request request)
             where T : class
         {
-            request = Validate(enumerable, request);
+            request = Validate(queryable, request);
 
-            return Process(enumerable, null, request.Page, request.ItemsPerPage);
+            return Process(queryable, null, request.Page, request.ItemsPerPage);
         }
-        public static Result<T> ToPaged<T>(this IQueryable<T> enumerable, Func<T, bool> predicate, Request request)
+        /// <summary>
+        /// Page an enumerable collection into manageable pages that you can to retreive
+        /// items you need in chunks in a very efficient way.
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <param name="queryable"><see cref="IQueryable{T}"/> collection to page.</param>
+        /// <param name="predicate">A lambda expression to filter data from the main
+        /// <see cref="IQueryable{T}"/> collection.</param>
+        /// <param name="request">A <see cref="Request"/> object describing a pagination
+        /// request with the following options: Page and items per page
+        /// </param>
+        /// <returns>A <see cref="Result{T}"/> object with the current page number,
+        /// total items, total pages and an array (x) of items.
+        /// </returns>
+        public static Result<T> ToPaged<T>(this IQueryable<T> queryable, Func<T, bool> predicate, Request request)
             where T : class
         {
-            request = Validate(enumerable, request);
+            request = Validate(queryable, request);
 
-            return Process(enumerable, predicate, request.Page, request.ItemsPerPage);
+            return Process(queryable, predicate, request.Page, request.ItemsPerPage);
         }
         #endregion
 
