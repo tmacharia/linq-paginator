@@ -40,18 +40,19 @@ namespace Caching
             _random = new Random();
             // Initialize common service
             _commonService = new CommonService();
+            _commonService.Initialize();
         }
 
-        public HashSet<CacheComponent> CacheComponents
+        public CacheComponent[] CacheComponents
         {
             get
             {
                 switch (_cacheType)
                 {
                     case CacheType.Memory:
-                        return _memCache;
+                        return _memCache?.ToArray();
                     case CacheType.Disk:
-                        return _diskCache;
+                        return _diskCache?.ToArray();
                     default:
                         return null;
                 }
@@ -167,8 +168,7 @@ namespace Caching
                 {
                     cacheComponent = _memCache.FirstOrDefault(x => x.Type == type);
                 }
-                
-                if(id != null || id != 0)
+                else if(id != null || id != 0)
                 {
                     cacheComponent = _memCache.FirstOrDefault(x => x.Id == id.Value);
                 }
@@ -190,8 +190,7 @@ namespace Caching
                 {
                     cacheComponent = _diskCache.FirstOrDefault(x => x.Type == type);
                 }
-
-                if (id != null || id != 0)
+                else if (id != null || id != 0)
                 {
                     cacheComponent = _diskCache.FirstOrDefault(x => x.Id == id.Value);
                 }

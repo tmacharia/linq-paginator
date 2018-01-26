@@ -143,8 +143,7 @@ namespace Caching
         }
         public bool Clear(string filename)
         {
-
-            ClearFileContents(filename);
+            ClearFileContents(Path.Combine(_folder,filename+_extension));
 
             return true;
         }
@@ -197,8 +196,16 @@ namespace Caching
         }
         private void ClearFileContents(string filepath)
         {
-            FileStream fileStream = File.Open(filepath, FileMode.Open);
+            FileStream fileStream = null;
 
+            try
+            {
+                fileStream = File.Open(filepath, FileMode.Open);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             /* 
              * Set the length of filestream to 0 and flush it to the physical file.
              *

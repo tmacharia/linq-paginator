@@ -27,66 +27,268 @@ namespace Tests
 
         #region Add Component to Cache Test Cases
         [TestCase]
-        public void AddResultOnly()
+        public void AddToDiskCache()
         {
+            _engine = new CachingEngine(CacheType.Disk);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
         }
         [TestCase]
-        public void AddRequestnResult()
+        public void AddToMemCache()
         {
+            _engine = new CachingEngine(CacheType.Memory);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
         }
         #endregion
 
 
         #region Update Cache Component Test Cases
         [TestCase]
-        public void UpdateResultOnly()
+        public void UpdateDiskCache()
         {
+            _engine = new CachingEngine(CacheType.Disk);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool addResult = _engine.Add(result);
+
+            Assert.IsTrue(addResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now update
+            result.ItemsPerPage = 15;
+            result.Page = 2;
+            result.TotalItems = 1500;
+
+            bool updateResult = _engine.Update(result);
+
+            Assert.IsTrue(updateResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+            Assert.AreEqual(15, ((Result<Rate>)(_engine.CacheComponents[0].Result)).ItemsPerPage);
         }
         [TestCase]
-        public void UpdateRequestnResult()
+        public void UpdateMemCache()
         {
+            _engine = new CachingEngine(CacheType.Memory);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool addResult = _engine.Add(result);
+
+            Assert.IsTrue(addResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now update
+            result.ItemsPerPage = 15;
+            result.Page = 2;
+            result.TotalItems = 1500;
+
+            bool updateResult = _engine.Update(result);
+
+            Assert.IsTrue(updateResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+            Assert.AreEqual(15, ((Result<Rate>)(_engine.CacheComponents[0].Result)).ItemsPerPage);
         }
         #endregion
 
 
         #region Get Cache Component Test Cases
         [TestCase]
-        public void GetWithRequest()
+        public void GetByTypeFromDisk()
         {
+            _engine = new CachingEngine(CacheType.Disk);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool addResult = _engine.Add(result);
+
+            Assert.IsTrue(addResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now get cache component
+            var componentResult = _engine.Get<Rate>();
+
+            Assert.NotNull(componentResult);
+            Assert.AreEqual(result.ItemsPerPage, componentResult.ItemsPerPage);
+            Assert.AreEqual(result.List.Count, componentResult.List.Count);
+            Assert.AreEqual(result.Page, componentResult.Page);
+            Assert.AreEqual(result.TotalItems, componentResult.TotalItems);
         }
-        [TestCase]
-        public void GetWithCacheId()
+        [Test]
+        public void GetByTypeFromMem()
         {
+            _engine = new CachingEngine(CacheType.Memory);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool addResult = _engine.Add(result);
+
+            Assert.IsTrue(addResult);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now get cache component
+            var componentResult = _engine.Get<Rate>();
+
+            Assert.NotNull(componentResult);
+            Assert.AreEqual(result.ItemsPerPage, componentResult.ItemsPerPage);
+            Assert.AreEqual(result.List.Count, componentResult.List.Count);
+            Assert.AreEqual(result.Page, componentResult.Page);
+            Assert.AreEqual(result.TotalItems, componentResult.TotalItems);
         }
         #endregion
 
 
         #region Remove Cache Component Test Cases
         [TestCase]
-        public void RemoveByType()
+        public void RemoveByTypeFromDisk()
         {
+            _engine = new CachingEngine(CacheType.Disk);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now Remove
+            bool removeResult = _engine.Remove<Rate>();
+
+            Assert.IsTrue(removeResult);
+            Assert.AreEqual(0, _engine.CacheComponents.Length);
         }
         [TestCase]
-        public void RemoveByCacheId()
+        public void RemoveByTypeFromMemory()
         {
+            _engine = new CachingEngine(CacheType.Memory);
 
-        }
-        [TestCase]
-        public void RemoveByTypenId()
-        {
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
 
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now Remove
+            bool removeResult = _engine.Remove<Rate>();
+
+            Assert.IsTrue(removeResult);
+            Assert.AreEqual(0, _engine.CacheComponents.Length);
         }
         [TestCase]
         public void ClearCache()
         {
+            _engine = new CachingEngine(CacheType.Disk);
 
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now clear cache
+            bool clearResult = _engine.ClearCache();
+
+            Assert.IsTrue(clearResult);
+        }
+        [TestCase]
+        public void Dispose()
+        {
+            _engine = new CachingEngine(CacheType.Disk);
+
+            Result<Rate> result = new Result<Rate>()
+            {
+                ItemsPerPage = 20,
+                List = new List<Rate>(),
+                Page = 1,
+                TotalItems = 100,
+                TotalPages = 5
+            };
+
+            bool res = _engine.Add(result);
+
+            Assert.IsTrue(res);
+            Assert.AreEqual(1, _engine.CacheComponents.Length);
+
+            // Now dispose
+            _engine.Dispose();
+            
+            Assert.IsNull(_engine.CacheComponents);
         }
         #endregion
     }

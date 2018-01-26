@@ -13,7 +13,7 @@ namespace Caching
         /// <summary>
         /// All cache component pointers for the current Caching Engine.
         /// </summary>
-        HashSet<CacheComponent> CacheComponents { get; }
+        CacheComponent[] CacheComponents { get; }
 
         bool Add<T>(Result<T> result) where T : class;
         bool Update<T>(Result<T> newResult) where T : class;
@@ -27,5 +27,6 @@ namespace Caching
         bool Remove<T>(int id) where T : class;
 
         bool ClearCache();
+        void Dispose();
     }
 }
