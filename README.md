@@ -1,6 +1,6 @@
 # Linq paginator
 
-[![Build Status](hhttps://travis-ci.org/devTimmy/linq-paginator.svg?branch=master)](https://travis-ci.org/devTimmy/linq-paginator)
+[![Build Status](https://travis-ci.org/devTimmy/linq-paginator.svg?branch=master)](https://travis-ci.org/devTimmy/linq-paginator)
 [![GitHub license](https://img.shields.io/github/license/devTimmy/mobileNumberFormatter.svg)](https://github.com/devTimmy/paginator/blob/master/LICENSE)
 [![Tests](https://img.shields.io/badge/tests-9%20passing-brightgreen.svg)]()
 
