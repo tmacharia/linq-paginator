@@ -1,19 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Timothy Maina</Authors>
+    <Authors>Timothy Macharia</Authors>
     <Company>Neon Clouds</Company>
     <Product>Linq Paginator</Product>
-    <PackageProjectUrl>https://github.com/devTimmy/paginator</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/devTimmy/paginator/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/devTimmy/linq-paginator</PackageProjectUrl>
+    <PackageLicense>https://github.com/devTimmy/linq-paginator/blob/master/LICENSE</PackageLicense>
+    <PackageLicenseUrl>https://github.com/devTimmy/linq-paginator/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>© Neon Clouds, 2017</Copyright>
-    <RepositoryUrl>https://github.com/devTimmy/paginator</RepositoryUrl>
+    <RepositoryUrl>https://github.com/devTimmy/linq-paginator</RepositoryUrl>
     <PackageTags>linq, pagination, list paginator</PackageTags>
     <Description>Retrieve items in a collection in bits by pulling chunks which are in form of pages. Works with huge array of items and only returns items you need.</Description>
     <PackageId>LinqPaginator</PackageId>
+    <Version>1.0.3</Version>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes>- Updates project from .NetStandard 1.3 -&gt; .NetStandard 2.0
+- Simplifies paginator methods for efficiency.
+- Changes result type to PagedResult&lt;T&gt; which is a struct
+- Allows specifying a Func&lt;T,bool&gt; predicate before performing pagination all in the 
+  .Paginate&lt;T&gt;() function</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
 
 </Project>

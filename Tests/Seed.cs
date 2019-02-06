@@ -1,5 +1,4 @@
-﻿using Paginator.Models;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +58,18 @@ namespace Tests
                 //yield return new List<Rate>(GenRandomRates(10000000));
                 //yield return new List<Rate>(GenRandomRates(15000000));
                 //yield return new List<Rate>(GenRandomRates(20000000));
+            }
+        }
+        private static IEnumerable NumStrings
+        {
+            get
+            {
+                yield return new List<string>()
+                {
+                    "1","2","3","4","5","6","7","8","9",
+                    "01","02","03","04","05","06","07","08","09",
+                    "001","002","003","004","005","006","007","008","009"
+                };
             }
         }
         public static IEnumerable Queryable
