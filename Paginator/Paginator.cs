@@ -59,7 +59,7 @@ namespace Paginator
                 page = page,
                 perpage = perpage,
                 total = totalItems,
-                items = enumerable.Skip(GetStart(page) * perpage).Take(perpage).ToList()
+                items = enumerable.Skip(GetStart(page)*perpage).Take(perpage).ToList()
             };
         }
         internal static PagedResult<T> ProcessPagination<T>(this IEnumerable<T> enumerable,
@@ -96,7 +96,9 @@ namespace Paginator
         }
 
         #region Private Region
-        internal static int GetStart(int page) => page--;
+        internal static int GetStart(int page) {
+            return page - 1;
+        }
         internal static string GetPropValue<T>(this T model, string propName)
             where T : class
         {
