@@ -116,7 +116,7 @@ namespace Paginator
             Type type = typeof(T);
             if (!_propsCache.ContainsKey(type.Name))
                 _propsCache.Add(type.Name, TypeDescriptor.GetProperties(type));
-
+            
             return _propsCache[type.Name];
         }
         #endregion
