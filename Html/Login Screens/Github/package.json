@@ -1,0 +1,46 @@
+{
+  "name": "login-screens-github",
+  "version": "1.0.0",
+  "description": "UI-UX design layout for github login screen.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "gulp clean",
+    "prebuild": "gulp prepare",
+    "build": "gulp minify",
+    "postbuild": "gulp clean-dev && gulp generate-service-worker && gulp zip",
+    "rebuild": "gulp clean && npm run build",
+    "start": "gulp start",
+    "stop": "gulp stop",
+    "watch": "gulp watch",
+    "start-and-watch": "gulp start-and-watch",
+    "test": "echo \"No tests for now bucko!\""
+  },
+  "keywords": [
+    "login",
+    "ui",
+    "github"
+  ],
+  "author": "Neon Clouds",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-gzip": "^1.4.2",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-minify": "^3.1.0",
+    "gulp-purifycss": "^0.2.0",
+    "gulp-sass": "^4.0.2",
+    "sw-precache": "^5.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "jquery-validation": "^1.19.0",
+    "popper.js": "^1.14.6"
+  }
+}

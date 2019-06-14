@@ -1,0 +1,256 @@
+// Color variables
+$default:#333;
+$bg:#f9f9f9;
+$success-light:#33c954;
+$success-dark:#29ac47;
+$primary-light:#1f8ef5;
+$primary-dark:#0659a6;
+$danger:rgb(201, 26, 26);
+$white:#fff;
+$border: #d8dee2;
+
+// Screen sizes variables
+$desktop: 1125px;
+$ipad-pro:1024px;
+$ipad:768px;
+$mobile-lg:500px;
+$mobile:415px;
+$iphone6:375px;
+$iphone5:320px;
+
+html,
+body {
+    background-color: $bg;
+    color: $default;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pull-right {
+    float: right;
+}
+.text-center{
+    text-align:center;
+}
+.text-gray {
+    color: rgb(133, 133, 133);
+}
+.error{
+    color: $danger;
+}
+.pointer:hover {
+    cursor: pointer;
+}
+
+main {
+    width: 22vw;
+    margin: 0 auto;
+
+    h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 300;
+        letter-spacing: -.5px;
+    }
+
+    form {
+        background-color: $white;
+        padding: 18px;
+        padding-bottom: 12px;
+        border: .5px solid $border;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+}
+
+label {
+    font-weight: 600;
+    width: 100%;
+}
+
+input[type=number],
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=tel]{
+    width: 100%;
+    border: .5px solid #d1d5da;
+    border-radius: 3px;
+    padding: .5em .7em;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, .075);
+}
+
+input[type=submit],
+input[type=reset] {
+    background-color: $primary-light;
+    background: linear-gradient(-180deg, $primary-light, $primary-dark 90%);
+    color: $white;
+    padding: .4em .6em;
+    font-weight: 600;
+    border: .4px solid $primary-dark;
+    border-radius: 3px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.form-group.required {
+    label::after {
+        content: '*';
+        color: $danger;
+    }
+}
+
+
+.password-strength {
+    background-color: whiteSmoke;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+    margin: 5px auto;
+    width: 100%;
+    height: 3px;
+    margin-bottom: 25px;
+    display: none;
+}
+.password-strength::after{
+    content: attr(data-text);
+    display: block;
+    color: #797979;
+}
+.password-strength>span {
+    background-color: $danger;
+    border-radius: 2px;
+    height: 3px;
+    display: block;
+    text-indent: -9999px;
+}
+
+#new-user-box {
+    margin-top: 12px;
+    border: .5px solid $border;
+    padding: .8em .6em;
+    border-radius: 3px;
+    text-align: center;
+
+    p {
+        margin: 0px;
+    }
+}
+
+.list-inline li {
+    display: inline-block;
+    padding-right: 8px;
+}
+
+footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: .9em;
+}
+
+@media(max-width:$desktop) {
+    main {
+        width: 25vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:$ipad-pro) {
+    main {
+        width: 32vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:$ipad) {
+    main {
+        width: 38vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:600px) {
+    main {
+        width: 40vw;
+    }
+
+    html,
+    body {
+        font-size: 12.5px;
+    }
+}
+
+@media(max-width:$mobile-lg) {
+    main {
+        width: 50vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+@media(max-width:480px) {
+    main {
+        width: 55vw;
+    }
+    html,
+    body {
+        font-size: 13.5px;
+    }
+}
+@media(max-width:$mobile) {
+    main {
+        width: 60vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:$iphone6) {
+    main {
+        width: 70vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:$iphone5) {
+    main {
+        width: 80vw;
+    }
+
+    html,
+    body {
+        font-size: 13px;
+    }
+}

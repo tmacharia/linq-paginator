@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<header>
+    <a href="/">
+        <img src="~/img/logo.png" alt="@Globals.AppName Octicon" height="35" />
+    </a>
+</header>
+<main>
+    @RenderBody()
+    <footer>
+        <ul class="list-inline">
+            <li>
+                <a href="#">Terms</a>
+            </li>
+            <li>
+                <a href="#">Privacy</a>
+            </li>
+            <li>
+                <a href="#">Security</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray">Contact @Globals.AppName</a>
+            </li>
+        </ul>
+    </footer>
+</main>

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Common
 {
@@ -46,5 +46,42 @@ namespace Common
         /// <returns>Integral equivalent</returns>
         public static int? ToInt(this object value) =>
             value.IsNotNull() ? (int?)Convert.ToInt32(value, Constants.Culture) : 0;
+
+        /// <summary>
+        /// Reflects all the properties in a model of generic <see cref="Type"/> that must be
+        /// a <see cref="class"/> and returns a <see cref="IDictionary{string, string}"/> pairs 
+        /// collection mapped in the following way:
+        /// 
+        /// Key: PropertyName,
+        /// Value: PropertyValue
+        /// </summary>
+        /// <typeparam name="T">Type of model</typeparam>
+        /// <param name="model">Model to reflect</param>
+        /// <returns></returns>
+        public static IDictionary<string, string> ToDictionary<T>(this T model)
+            where T : class
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            PropertyDescriptor[] props = typeof(T).GetPropertyDescriptors();
+            for (int i = 0; i < props.Length; i++)
+            {
+                string name = props[i].Name;
+                pairs.Add(name, model.GetPropertyValue<T, string>(name));
+            }
+            return pairs;
+        }
+        public static string BytesToString(this long byteCount)
+        {
+            string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
+            if (byteCount == 0)
+                return "0" + suf[0];
+            long bytes = Math.Abs(byteCount);
+            int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+            double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+            return (Math.Sign(byteCount) * num).ToString() + suf[place];
+        }
     }
 }

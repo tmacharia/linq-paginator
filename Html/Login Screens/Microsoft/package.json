@@ -1,0 +1,16 @@
+{
+  "name": "login-screens-microsoft",
+  "version": "1.0.0",
+  "description": "UI-UX design layout for microsoft login screen.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "login",
+    "ui",
+    "microsoft"
+  ],
+  "author": "Neon Clouds",
+  "license": "ISC"
+}

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using Common.Primitives;
+using Common.Structs;
+using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace Common
 {

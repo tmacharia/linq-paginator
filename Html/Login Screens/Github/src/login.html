@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sign in to WebApp</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Generic WebApp's Login Screen.">
+    <meta name="theme-color" content="#0659a6">
+    <link rel="icon" type="image/png" sizes="199x198" href="img/icon-transparent.png">
+    <link rel="icon" type="image/ico" sizes="128x128" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico" type="image/ico">
+    <link rel="manifest" href="manifest.json">
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    <header>
+        <a href="/">
+            <img src="img/logo.png" alt="Company Octicon" height="35" />
+        </a>
+    </header>
+    <main>
+        <h1>Sign in to WebApp</h1>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>Incorrect username or password</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="/login.html" method="POST">
+            <div class="form-group required">
+                <label for="username">Username or email address</label>
+                <input type="text" name="username" id="username" required autocomplete="off" autocorrect="off" autocapitalize="off" />
+            </div>
+            <div class="form-group required">
+                <label for="password">
+                    Password
+                    <span class="pull-right">
+                        <a href="password_reset.html">Forgot Password?</a>
+                    </span>
+                </label>
+                <input type="password" name="password" id="password" required />
+            </div>
+            <div class="">
+                <input type="submit" value="Sign In">
+            </div>
+        </form>
+        <section id="new-user-box">
+            <p>
+                <span>New to WebApp? </span>
+                <span>
+                    <a href="join.html">Create an account.</a>
+                </span>
+            </p>
+        </section>
+        <footer>
+            <ul class="list-inline">
+                <li>
+                    <a href="#">Terms</a>
+                </li>
+                <li>
+                    <a href="#">Privacy</a>
+                </li>
+                <li>
+                    <a href="#">Security</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray">Contact WebApp</a>
+                </li>
+            </ul>
+        </footer>
+    </main>
+    <!-- build:js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

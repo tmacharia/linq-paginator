@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -14,7 +13,7 @@ namespace Common
     {
         public static StringComparison StringComparison { get; set; } = StringComparison.Ordinal;
         public static StringComparison StringComparisonIgnoreCase { get; } = StringComparison.OrdinalIgnoreCase;
-        public static CultureInfo Culture { get; } = Thread.CurrentThread.CurrentCulture;
+        public static CultureInfo Culture { get; } = Thread.CurrentThread.CurrentUICulture;
         public static Encoding Encoding { get; } = new UTF8Encoding();
     }
 }
