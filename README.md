@@ -33,3 +33,38 @@ _names.Add("Test-03");
 _names.Add("Test-04");
 _names.Add("Test-05");
 ```
+#### Usage
+
+```c#
+PagedResult<string> result = _names.Paged(page: 1, perpage: 2);
+```
+
+#### Result Model
+
+```c#
+public struct PagedResult<T> 
+{
+    /// <summary>
+    /// Current page in pagination
+    /// </summary>
+    public int Page { get; set; }
+    /// <summary>
+    /// Total number of items in every page as per
+    /// pagination request. Defaults to 10.
+    /// </summary>
+    public int ItemsPerPage { get; set; }
+    /// <summary>
+    /// Number of pages used to paginate our <see cref="List"/> with
+    /// each page containing (x) <see cref="ItemsPerPage"/>
+    /// </summary>
+    public int TotalPages { get; set; }
+    /// <summary>
+    /// Number of items matching your pagination request
+    /// </summary>
+    public int TotalItems { get; set; }
+    /// <summary>
+    /// Array containing items in the current page 
+    /// </summary>
+    public T[] List { get; set; }
+}
+```
