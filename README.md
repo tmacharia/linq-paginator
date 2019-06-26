@@ -1,18 +1,18 @@
 # Linq Paginator
 
-[![Build Status](https://travis-ci.org/devTimmy/linq-paginator.svg?branch=master)](https://travis-ci.org/devTimmy/linq-paginator)
+[![Build status](https://ci.appveyor.com/api/projects/status/fi3hf87pwmtdmsor?svg=true)](https://ci.appveyor.com/project/tmacharia/linq-paginator)
 [![Nuget](https://img.shields.io/nuget/v/LinqPaginator.svg?style=popout)](https://www.nuget.org/packages/LinqPaginator/)
 [![Nuget](https://img.shields.io/nuget/dt/LinqPaginator.svg)](https://www.nuget.org/packages/LinqPaginator/)
 
 
 Retrieve collection results from `IQueryable<T>`, `IEnumerable<T>` or any array based data type that inherits `ICollection<T>` and packages the results into pages for easy fetching to enable lazy loading data on UI components in a fast way when pulling large sets of data.
 
-### Usage
+### Install
 
 Install package from Nuget by running the following command in Package Manager Console.
 
 ```bash
-Install-Package LinqPaginator -Version 1.0.5
+Install-Package LinqPaginator -Version 1.0.6
 ```
 
 Then go ahead add a using statement to reference the already downloaded package.
@@ -23,14 +23,13 @@ using LinqPaginator;
 
 This library works with almost all arrays that inherit from `ICollection<T>` and it provides an extension method to paginate your collection as shown below passing a page number and the number of items to return per page.
 
-#### Example:
+#### Sample Data:
 
 ```c#
-IEnumerable<string> _names = new List<string>()
-{
-    "Test-001","Test-002","Test-003","Test-004","Test-005"
-};
-
-PagedResult<string> paged = _names.Paged(1,2);
-
+IList<string> _names = new List<string>();
+_names.Add("Test-01");
+_names.Add("Test-02");
+_names.Add("Test-03");
+_names.Add("Test-04");
+_names.Add("Test-05");
 ```
