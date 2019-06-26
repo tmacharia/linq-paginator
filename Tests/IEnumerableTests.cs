@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Paginator;
 using System.Linq;
 using System;
+using Common;
 
 namespace Tests
 {
@@ -14,9 +15,9 @@ namespace Tests
         {
             var result = Rates.Paginate(1, 2);
 
-            Assert.AreEqual(2, result.perpage);
-            Assert.AreEqual(1, result.page);
-            Assert.AreEqual(Rates.Count, result.total);
+            Assert.AreEqual(2, result.ItemsPerPage);
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
         }
 
         [Test, TestCaseSource(typeof(Seed), "List")]
@@ -25,8 +26,8 @@ namespace Tests
             var result = Rates.Paginate();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.page);
-            Assert.AreEqual(Rates.Count, result.total);
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
         }
 
         [Test, TestCaseSource(typeof(Seed), "NumStrings")]
@@ -34,8 +35,8 @@ namespace Tests
         {
             var result = nums.Paginate(x => x.Matches("0"), 2, 5);
 
-            Assert.AreEqual(2, result.page);
-            Assert.AreEqual(5, result.perpage);
+            Assert.AreEqual(2, result.Page);
+            Assert.AreEqual(5, result.ItemsPerPage);
         }
 
         [Test, TestCaseSource(typeof(Seed), "Pages")]
@@ -44,10 +45,10 @@ namespace Tests
             var result = Rates.Paginate(null, 1, 10, "Value", "desc");
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.page);
-            Assert.AreEqual(Rates.Count, result.total);
-            Assert.Greater(result.items.First().Value, result.items.Last().Value);
-            result.items.ForEach(x =>
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
+            Assert.Greater(result.List.First().Value, result.List.Last().Value);
+            result.List.ForEach(x =>
             {
                 Console.WriteLine(x.Value);
             });
@@ -58,7 +59,7 @@ namespace Tests
         {
             var result = list.Paginate(null);
 
-            Assert.AreEqual(1, result.page);
+            Assert.AreEqual(1, result.Page);
         }
     }
 }

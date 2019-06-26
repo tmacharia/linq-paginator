@@ -4,7 +4,7 @@
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
     <TargetFrameworks>
       netstandard1.5;netstandard1.6;netstandard2.0;
-      netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;
+      netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;
       net46;net461;net462;
     </TargetFrameworks>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -18,39 +18,45 @@
     <RepositoryUrl>https://github.com/devTimmy/linq-paginator</RepositoryUrl>
     <PackageTags>linq, pagination, list paginator, paging, list, array, collection</PackageTags>
     <Description>For queries that return a lot of data, a need emerges to consume the results in chunks rather than the entire set. Consuming all results at once can be costly in terms of network traffic thus slowing down your application. 
-
 Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
 - page: 1,
 - pages: 5,
 - perpage: 20,
 - total: 100,
-- data (collection of the first 20 records)</Description>
+- data (collection of the first 20 records)
+</Description>
     <PackageId>LinqPaginator</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.1.0-beta</Version>
     
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageReleaseNotes>Updates the library to support projects that target the following frameworks:
-- netcoreapp1.0
-- netcoreapp1.1
-- netcoreapp2.0
-- net46
-- net461
-- net462
-- netstandard1.5
-- netstandard1.6
-- netstandard2.0</PackageReleaseNotes>
-    <PackageLicenseUrl>https://github.com/devTimmy/linq-paginator/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageReleaseNotes>
+      Updates the library to support projects that target the following frameworks:
+      - netcoreapp1.0
+      - netcoreapp1.1
+      - netcoreapp2.0
+      - netcoreapp2.1
+      - net46
+      - net461
+      - net462
+      - netstandard1.5
+      - netstandard1.6
+      - netstandard2.0
+    </PackageReleaseNotes>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="Shared.Common" Version="1.1.0" />
   </ItemGroup>
 
    <!--Conditionally obtain references for .NET Core 1.1 target--> 
-  <ItemGroup Condition="&#xD;&#xA;             '$(TargetFramework)' == 'netcoreapp1.0' or &#xD;&#xA;             '$(TargetFramework)' == 'netcoreapp1.1' or &#xD;&#xA;             '$(TargetFramework)' == 'netstandard1.5' or &#xD;&#xA;             '$(TargetFramework)' == 'netstandard1.6'&#xD;&#xA;             ">
-    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <Target Name="LogDebugInfo">
