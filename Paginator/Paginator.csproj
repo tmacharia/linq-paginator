@@ -1,11 +1,59 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <TargetFrameworks>
+      netstandard1.5;netstandard1.6;netstandard2.0;
+      netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;
+      net46;net461;net462;
+    </TargetFrameworks>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Timothy Macharia</Authors>
+    <Company>Neon Clouds</Company>
+    <Product>Linq Paginator</Product>
+    <Title>Linq Paginator</Title>
+    <PackageProjectUrl>https://github.com/devTimmy/linq-paginator</PackageProjectUrl>
+    <Copyright>© Neon Clouds, 2017</Copyright>
+    <RepositoryUrl>https://github.com/devTimmy/linq-paginator</RepositoryUrl>
+    <PackageTags>linq, pagination, list paginator, paging, list, array, collection</PackageTags>
+    <Description>For queries that return a lot of data, a need emerges to consume the results in chunks rather than the entire set. Consuming all results at once can be costly in terms of network traffic thus slowing down your application. 
+
+Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
+- page: 1,
+- pages: 5,
+- perpage: 20,
+- total: 100,
+- data (collection of the first 20 records)</Description>
+    <PackageId>LinqPaginator</PackageId>
+    <Version>1.0.6</Version>
+    
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes>Updates the library to support projects that target the following frameworks:
+- netcoreapp1.0
+- netcoreapp1.1
+- netcoreapp2.0
+- net46
+- net461
+- net462
+- netstandard1.5
+- netstandard1.6
+- netstandard2.0</PackageReleaseNotes>
+    <PackageLicenseUrl>https://github.com/devTimmy/linq-paginator/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Exceptional\Exceptional.csproj" />
+    <PackageReference Include="System.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
 
+   <!--Conditionally obtain references for .NET Core 1.1 target--> 
+  <ItemGroup Condition="&#xD;&#xA;             '$(TargetFramework)' == 'netcoreapp1.0' or &#xD;&#xA;             '$(TargetFramework)' == 'netcoreapp1.1' or &#xD;&#xA;             '$(TargetFramework)' == 'netstandard1.5' or &#xD;&#xA;             '$(TargetFramework)' == 'netstandard1.6'&#xD;&#xA;             ">
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  </ItemGroup>
+
+  <Target Name="LogDebugInfo">
+    <Message Text="Building for $(TargetFramework) on $(OS)" Importance="normal" />
+  </Target>
 </Project>
