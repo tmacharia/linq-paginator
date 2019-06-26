@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Paginator
+﻿namespace Paginator
 {
     /// <summary>
     /// Packages the result of a request showing information

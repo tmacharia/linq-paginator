@@ -40,20 +40,24 @@ namespace Tests
         {
             get
             {
+                // hundreds
                 yield return new List<Rate>(GenRandomRates(9));
                 yield return new List<Rate>(GenRandomRates(50));
-                //yield return new List<Rate>(GenRandomRates(250));
-                //yield return new List<Rate>(GenRandomRates(537));
-                //yield return new List<Rate>(GenRandomRates(750));
-                //yield return new List<Rate>(GenRandomRates(1000));
-
-                //yield return new List<Rate>(GenRandomRates(5000));
-                //yield return new List<Rate>(GenRandomRates(2320500));
-                //yield return new List<Rate>(GenRandomRates(20000));
-                //yield return new List<Rate>(GenRandomRates(50000));
-                //yield return new List<Rate>(GenRandomRates(100000));
-
-                //yield return new List<Rate>(GenRandomRates(1000000));
+                yield return new List<Rate>(GenRandomRates(250));
+                yield return new List<Rate>(GenRandomRates(537));
+                yield return new List<Rate>(GenRandomRates(750));
+                // thousands
+                yield return new List<Rate>(GenRandomRates(1000));
+                yield return new List<Rate>(GenRandomRates(5000));
+                yield return new List<Rate>(GenRandomRates(20000));
+                yield return new List<Rate>(GenRandomRates(50000));
+                yield return new List<Rate>(GenRandomRates(100000));
+                yield return new List<Rate>(GenRandomRates(25000));
+                yield return new List<Rate>(GenRandomRates(500000));
+                yield return new List<Rate>(GenRandomRates(750000));
+                yield return new List<Rate>(GenRandomRates(900000));
+                // millions
+                yield return new List<Rate>(GenRandomRates(1000000));
                 ///yield return new List<Rate>(GenRandomRates(5000037));
                 //yield return new List<Rate>(GenRandomRates(10000000));
                 //yield return new List<Rate>(GenRandomRates(15000000));
@@ -107,13 +111,8 @@ namespace Tests
         {
             List<Rate> list = new List<Rate>(count);
 
-            for (int i = 0; i < count; i++)
-            {
-                Rate rate = new Rate()
-                {
-                    Value = Random.Next(1, 100)
-                };
-                list.Add(rate);
+            for (int i = 0; i < count; i++) {
+                list.Add(new Rate(){ Value = Random.Next(1, 100) });
             }
 
             return list.ToArray();
@@ -132,7 +131,7 @@ namespace Tests
         }
         public static int TotalPages(int total, int perpage)
         {
-            int n = (int)(total / perpage);
+            int n = total / perpage;
             
             if ((total % perpage) > 0)
                 n++;

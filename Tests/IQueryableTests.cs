@@ -14,9 +14,9 @@ namespace Tests
             var result = Rates.AsQueryable()
                               .Paginate(1, 2);
 
-            Assert.AreEqual(2, result.perpage);
-            Assert.AreEqual(1, result.page);
-            Assert.AreEqual(Rates.Count, result.total);
+            Assert.AreEqual(2, result.ItemsPerPage);
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
         }
 
         [Test, TestCaseSource(typeof(Seed), "List")]
@@ -26,8 +26,8 @@ namespace Tests
                               .Paginate();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.page);
-            Assert.AreEqual(Rates.Count, result.total);
+            Assert.AreEqual(1, result.Page);
+            Assert.AreEqual(Rates.Count, result.TotalItems);
         }
 
 
@@ -38,9 +38,9 @@ namespace Tests
                               .Paginate(x => x.Value > 9, 2, 2);
 
             Assert.NotNull(result);
-            Assert.AreEqual(2, result.page);
-            Assert.AreEqual(2, result.perpage);
-            Assert.AreEqual(Rates.Count(x => x.Value > 9), result.total);
+            Assert.AreEqual(2, result.Page);
+            Assert.AreEqual(2, result.ItemsPerPage);
+            Assert.AreEqual(Rates.Count(x => x.Value > 9), result.TotalItems);
         }
 
         [Test, TestCaseSource(typeof(Seed), "Pages")]
@@ -49,7 +49,7 @@ namespace Tests
             var result = list.AsQueryable()
                              .Paginate(null);
 
-            Assert.AreEqual(1, result.page);
+            Assert.AreEqual(1, result.Page);
         }
     }
 }
