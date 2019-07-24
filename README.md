@@ -35,8 +35,14 @@ _names.Add("Test-05");
 ```
 #### Usage
 
+You can use either of the methods.
+
 ```c#
+PagedResult<string> result = _names.Page(page: 1, perpage: 2);
 PagedResult<string> result = _names.Paged(page: 1, perpage: 2);
+PagedResult<string> result = _names.Paginate(page: 1, perpage: 2);
+PagedResult<string> result = _names.ToPages(page: 1, perpage: 2);
+PagedResult<string> result = _names.ToPaginate(page: 1, perpage: 2);
 ```
 
 #### Result Model

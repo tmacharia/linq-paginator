@@ -23,7 +23,7 @@ namespace Tests
         public void Empty(ICollection<Rate> Rates)
         {
             var result = Rates.AsQueryable()
-                              .Paginate();
+                              .Page();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Page);
@@ -35,7 +35,7 @@ namespace Tests
         public void FuncTest(ICollection<Rate> Rates)
         {
             var result = Rates.AsQueryable()
-                              .Paginate(x => x.Value > 9, 2, 2);
+                              .Paged(x => x.Value > 9, 2, 2);
 
             Assert.NotNull(result);
             Assert.AreEqual(2, result.Page);
@@ -47,7 +47,7 @@ namespace Tests
         public void NullRequestTest(ICollection<Rate> list)
         {
             var result = list.AsQueryable()
-                             .Paginate(null);
+                             .ToPages(null);
 
             Assert.AreEqual(1, result.Page);
         }

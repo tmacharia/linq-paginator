@@ -17,30 +17,26 @@
     <Copyright>© Neon Clouds, 2017</Copyright>
     <RepositoryUrl>https://github.com/devTimmy/linq-paginator</RepositoryUrl>
     <PackageTags>linq, pagination, list paginator, paging, list, array, collection</PackageTags>
-    <Description>For queries that return a lot of data, a need emerges to consume the results in chunks rather than the entire set. Consuming all results at once can be costly in terms of network traffic thus slowing down your application. 
-Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
-- page: 1,
-- pages: 5,
-- perpage: 20,
-- total: 100,
-- data (collection of the first 20 records)
-</Description>
+    <Description>
+      For queries that return a lot of data, a need emerges to consume the results in chunks rather than the entire set. Consuming all results at once can be costly in terms of network traffic thus slowing down your application.
+      Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
+      - Page: 1,
+      - TotalPages: 5,
+      - ItemsPerPage: 20,
+      - TotalItems: 100,
+      - List (collection of the first 20 records)
+    </Description>
     <PackageId>LinqPaginator</PackageId>
-    <Version>1.1.0-beta</Version>
+    <Version>1.1.0</Version>
     
     <NeutralLanguage>en</NeutralLanguage>
     <PackageReleaseNotes>
-      Updates the library to support projects that target the following frameworks:
-      - netcoreapp1.0
-      - netcoreapp1.1
-      - netcoreapp2.0
-      - netcoreapp2.1
-      - net46
-      - net461
-      - net462
-      - netstandard1.5
-      - netstandard1.6
-      - netstandard2.0
+      Adds the following methods when calling pagination; to on-board earlier users, and give more flexibility.
+      -> .Paginate()
+      -> .Page()
+      -> .Paged()
+      -> .ToPages()
+      -> .ToPaginate()
     </PackageReleaseNotes>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
