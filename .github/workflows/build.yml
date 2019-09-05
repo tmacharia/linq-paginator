@@ -13,3 +13,5 @@ jobs:
       run: dotnet restore
     - name: Build Project/Solution
       run: dotnet build
+    - name: Testing
+      run: dotnet test
