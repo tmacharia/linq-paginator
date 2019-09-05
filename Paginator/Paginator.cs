@@ -181,6 +181,7 @@ namespace Paginator
                 Page = page,
                 ItemsPerPage = perpage,
                 TotalItems = totalItems,
+                TotalPages = CalculateTotalPages(totalItems,perpage),
                 List = enumerable.Skip(GetStart(page)*perpage).Take(perpage).ToArray()
             };
         }
@@ -208,6 +209,7 @@ namespace Paginator
                 Page = page,
                 ItemsPerPage = perpage,
                 TotalItems = totalItems,
+                TotalPages = CalculateTotalPages(totalItems,perpage)
             };
 
             result.List = elements.Skip(GetStart(page) * perpage)
@@ -220,6 +222,15 @@ namespace Paginator
         #region Private Region
         internal static int GetStart(int page) {
             return page - 1;
+        }
+        internal static int CalculateTotalPages(int totalItems, int perpage)
+        {
+            int ans = 0;
+            if (perpage < 1)
+                return ans;
+            ans = totalItems / perpage;
+            ans += totalItems % perpage;
+            return ans;
         }
         #endregion
     }
