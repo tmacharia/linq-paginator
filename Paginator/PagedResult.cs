@@ -50,14 +50,10 @@ namespace Paginator
 
         public override bool Equals(object obj)
         {
-            PagedResult<T> item = (PagedResult<T>)obj;
-
-            if (item == null)
-            {
+            if (obj == null)
                 return false;
-            }
-
-            return item.GetHashCode() == GetHashCode();
+            
+            return obj.GetHashCode() == GetHashCode();
         }
 
         public override int GetHashCode()
