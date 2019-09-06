@@ -384,7 +384,7 @@ namespace Paginator
             if (perpage < 1)
                 return ans;
             ans = totalItems / perpage;
-            ans += totalItems % perpage;
+            ans += (totalItems % perpage) > 0 ? 1 : 0;
             return ans;
         }
         #endregion
