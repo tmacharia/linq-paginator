@@ -3,8 +3,8 @@
   <PropertyGroup>
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
     <TargetFrameworks>
-      netstandard1.5;netstandard1.6;netstandard2.0;
-      netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;
+      netstandard2.0;
+      netcoreapp2.0;netcoreapp2.1;
       net46;net461;net462;
     </TargetFrameworks>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -27,16 +27,12 @@
       - List (collection of the first 20 records)
     </Description>
     <PackageId>LinqPaginator</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     
     <NeutralLanguage>en</NeutralLanguage>
     <PackageReleaseNotes>
-      Adds the following methods when calling pagination; to on-board earlier users, and give more flexibility.
-      -> .Paginate()
-      -> .Page()
-      -> .Paged()
-      -> .ToPages()
-      -> .ToPaginate()
+      Fixes bug/issue with pagination result:
+      -&gt; TotalPages is always zero
     </PackageReleaseNotes>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -44,7 +40,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Shared.Common" Version="1.1.0" />
+    <PackageReference Include="Shared.Common" Version="1.1.9" />
   </ItemGroup>
 
    <!--Conditionally obtain references for .NET Core 1.1 target--> 

@@ -1,4 +1,7 @@
-﻿namespace Paginator
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Paginator
 {
     /// <summary>
     /// Packages the result of a request showing information
@@ -34,8 +37,51 @@
         /// </summary>
         public int TotalItems { get; set; }
         /// <summary>
-        /// Array containing items in the current page 
+        /// [TO BE DEPRECATED] Array containing items in the current page.
+        /// 
+        /// This property will be removed in a future release thus giving enough time
+        /// to migrate to using <see cref="Items"/>.
         /// </summary>
         public T[] List { get; set; }
+        /// <summary>
+        /// List of items in the current page.
+        /// </summary>
+        public ICollection<T> Items => List.ToList();
+
+        public override bool Equals(object obj)
+        {
+            PagedResult<T> item = (PagedResult<T>)obj;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return item.GetHashCode() == GetHashCode();
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var result = 0;
+                result = (result * 397) ^ Page;
+                result = (result * 397) ^ ItemsPerPage;
+                result = (result * 397) ^ TotalPages;
+                result = (result * 397) ^ TotalItems;
+                result = (result * 397) ^ List.GetHashCode();
+                return result;
+            }
+        }
+
+        public static bool operator ==(PagedResult<T> left, PagedResult<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(PagedResult<T> left, PagedResult<T> right)
+        {
+            return !(left == right);
+        }
     }
 }

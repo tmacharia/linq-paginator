@@ -6,17 +6,20 @@ using Paginator;
 namespace Tests
 {
     [TestFixture]
-    public class IQueryableTests
+    public class IQueryableTests : TestBase
     {
         [Test, TestCaseSource(typeof(Seed), "List")]
         public void ParamsTest(ICollection<Rate> Rates)
         {
+            int perpage = 2;
+            int pages = GetPages(Rates.Count, perpage);
             var result = Rates.AsQueryable()
                               .Paginate(1, 2);
 
             Assert.AreEqual(2, result.ItemsPerPage);
             Assert.AreEqual(1, result.Page);
             Assert.AreEqual(Rates.Count, result.TotalItems);
+            Assert.AreEqual(pages, result.TotalPages);
         }
 
         [Test, TestCaseSource(typeof(Seed), "List")]
