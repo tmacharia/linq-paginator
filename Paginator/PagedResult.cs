@@ -43,10 +43,6 @@ namespace Paginator
         /// to migrate to using <see cref="Items"/>.
         /// </summary>
         public T[] List { get; set; }
-        /// <summary>
-        /// List of items in the current page.
-        /// </summary>
-        public ICollection<T> Items => List.ToList();
 
         public override bool Equals(object obj)
         {
@@ -58,15 +54,16 @@ namespace Paginator
 
         public override int GetHashCode()
         {
-            unchecked
+            unchecked // Overflow is fine, just wrap
             {
-                var result = 0;
-                result = (result * 397) ^ Page;
-                result = (result * 397) ^ ItemsPerPage;
-                result = (result * 397) ^ TotalPages;
-                result = (result * 397) ^ TotalItems;
-                result = (result * 397) ^ List.GetHashCode();
-                return result;
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 23 + Page.GetHashCode();
+                hash = hash * 23 + ItemsPerPage.GetHashCode();
+                hash = hash * 23 + TotalPages.GetHashCode();
+                hash = hash * 23 + TotalItems.GetHashCode();
+                hash = hash * 23 + List.GetHashCode();
+                return hash;
             }
         }
 
