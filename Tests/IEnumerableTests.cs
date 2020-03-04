@@ -58,8 +58,8 @@ namespace Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Page);
             Assert.AreEqual(Rates.Count, result.TotalItems);
-            Assert.Greater(result.List.First().Value, result.List.Last().Value);
-            result.List.ForEach(x =>
+            Assert.Greater(result.Items.First().Value, result.Items.Last().Value);
+            result.Items.ForEach(x =>
             {
                 Console.WriteLine(x.Value);
             });

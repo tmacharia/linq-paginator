@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Paginator\Paginator.csproj" />
+    <ProjectReference Include="..\src\Paginator.csproj" />
   </ItemGroup>
   
 </Project>
