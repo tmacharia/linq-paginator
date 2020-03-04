@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Paginator
@@ -16,8 +17,12 @@ namespace Paginator
     /// </list>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public struct PagedResult<T> 
+    public class PagedResult<T> 
     {
+        public PagedResult()
+        {
+            Items = new HashSet<T>();
+        }
         /// <summary>
         /// Current page in pagination
         /// </summary>
@@ -37,12 +42,17 @@ namespace Paginator
         /// </summary>
         public int TotalItems { get; set; }
         /// <summary>
-        /// [TO BE DEPRECATED] Array containing items in the current page.
+        /// Array containing items in the current page.
         /// 
         /// This property will be removed in a future release thus giving enough time
         /// to migrate to using <see cref="Items"/>.
         /// </summary>
+        [Obsolete("Use 'Items' property to get list of elements in the current page. [REASON]-Properties should not return arrays.",true)]
         public T[] List { get; set; }
+        /// <summary>
+        /// Collection containing items in the current page.
+        /// </summary>
+        public ICollection<T> Items { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -62,7 +72,7 @@ namespace Paginator
                 hash = hash * 23 + ItemsPerPage.GetHashCode();
                 hash = hash * 23 + TotalPages.GetHashCode();
                 hash = hash * 23 + TotalItems.GetHashCode();
-                hash = hash * 23 + List.GetHashCode();
+                hash = hash * 23 + Items.GetHashCode();
                 return hash;
             }
         }

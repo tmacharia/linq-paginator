@@ -329,47 +329,43 @@ namespace Paginator
         internal static PagedResult<T> ProcessPagination<T>(this IEnumerable<T> enumerable,
                     int page = _page, int perpage = _perpage)
         {
-            int totalItems = enumerable.Count();
+            int total = enumerable.Count();
 
             return new PagedResult<T>()
             {
                 Page = page,
                 ItemsPerPage = perpage,
-                TotalItems = totalItems,
-                TotalPages = CalculateTotalPages(totalItems,perpage),
-                List = enumerable.Skip(GetStart(page)*perpage).Take(perpage).ToArray()
+                TotalItems = total,
+                TotalPages = CalculateTotalPages(total, perpage),
+                Items = enumerable.Skip((page - 1) * perpage).Take(perpage).ToList()
             };
         }
         internal static PagedResult<T> ProcessPagination<T>(this IEnumerable<T> enumerable,
             Func<T, bool> predicate=null, int page = _page, int perpage = _perpage, string orderBy = null,
             string order = "asc") where T : class
         {
-            int totalItems = 0;
-            IEnumerable<T> elements;
+            int total = 0;
+            IEnumerable<T> query;
 
-            elements = predicate != null ?
-                        enumerable.Where(predicate) :
-                        enumerable;
+            query = predicate != null ? enumerable.Where(predicate) : enumerable;
+            if (orderBy.IsValid())
+            {
+                query = order == "asc" ? query.OrderBy(x => x.GetPropertyValue<T, object>(orderBy)) :
+                       order == "desc" ? query.OrderByDescending(x => x.GetPropertyValue<T, object>(orderBy)) : query;
+            }
 
-            orderBy = orderBy.IsValid() ? orderBy : typeof(T).GetPropertyDescriptors()[0].Name;
-
-            elements = order == "asc" ? elements.OrderBy(x => x.GetPropertyValue<T,object>(orderBy)) :
-                       order == "desc" ? elements.OrderByDescending(x => x.GetPropertyValue<T,object>(orderBy)) : elements;
-
-            totalItems = elements.Count();
+            total = query.Count();
 
 
             PagedResult<T> result = new PagedResult<T>()
             {
                 Page = page,
                 ItemsPerPage = perpage,
-                TotalItems = totalItems,
-                TotalPages = CalculateTotalPages(totalItems,perpage)
+                TotalItems = total,
+                TotalPages = CalculateTotalPages(total, perpage)
             };
 
-            result.List = elements.Skip(GetStart(page) * perpage)
-                                   .Take(perpage)
-                                   .ToArray();
+            result.Items = query.Skip((page - 1) * perpage).Take(perpage).ToList();
 
             return result;
         }
@@ -381,10 +377,11 @@ namespace Paginator
         internal static int CalculateTotalPages(int totalItems, int perpage)
         {
             int ans = 0;
-            if (perpage < 1)
+            if (perpage >= 1) {
+                ans = totalItems / perpage;
+                ans += (totalItems % perpage) > 0 ? 1 : 0;
                 return ans;
-            ans = totalItems / perpage;
-            ans += (totalItems % perpage) > 0 ? 1 : 0;
+            }
             return ans;
         }
         #endregion
