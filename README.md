@@ -5,14 +5,14 @@
 [![Nuget](https://img.shields.io/nuget/dt/LinqPaginator.svg)](https://www.nuget.org/packages/LinqPaginator/)
 
 
-Retrieve collection results from `IQueryable<T>`, `IEnumerable<T>` or any array based data type that inherits `ICollection<T>` and packages the results into pages for easy fetching to enable lazy loading data on UI components in a fast way when pulling large sets of data.
+Retrieve collection results from `IQueryable<T>`, `IEnumerable<T>` or any array based data type that inherits `IEnumerable` and packages the results into pages for easy fetching to enable lazy loading data on UI components in a fast way when pulling large sets of data.
 
 ### Install
 
 Install package from Nuget by running the following command in Package Manager Console.
 
 ```bash
-Install-Package LinqPaginator -Version 1.0.6
+Install-Package LinqPaginator
 ```
 
 Then go ahead add a using statement to reference the already downloaded package.
@@ -47,30 +47,8 @@ PagedResult<string> result = _names.ToPaginate(page: 1, perpage: 2);
 
 #### Result Model
 
-```c#
-public struct PagedResult<T> 
-{
-    /// <summary>
-    /// Current page in pagination
-    /// </summary>
-    public int Page { get; set; }
-    /// <summary>
-    /// Total number of items in every page as per
-    /// pagination request. Defaults to 10.
-    /// </summary>
-    public int ItemsPerPage { get; set; }
-    /// <summary>
-    /// Number of pages used to paginate our <see cref="List"/> with
-    /// each page containing (x) <see cref="ItemsPerPage"/>
-    /// </summary>
-    public int TotalPages { get; set; }
-    /// <summary>
-    /// Number of items matching your pagination request
-    /// </summary>
-    public int TotalItems { get; set; }
-    /// <summary>
-    /// Array containing items in the current page 
-    /// </summary>
-    public T[] List { get; set; }
-}
-```
++ `Page` : Current Page Number : `int`
++ `ItemsPerPage` : Number of items returned in every page : `int`
++ `TotalPages` : Total number of pages used to paginate entire collection : `int`
++ `TotalItems` : Total number of items matching your pagination request : `int`
++ `Items` : Collection containing items in the current page : `int`
