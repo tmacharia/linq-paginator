@@ -7,6 +7,11 @@
     /// </summary>
     public struct PaginationRequest 
     {
+        /// <summary>
+        /// Instanciates a request with default values.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="perPage"></param>
         public PaginationRequest(int page, int perPage)
         {
             Page = page;

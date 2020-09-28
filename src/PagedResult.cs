@@ -19,6 +19,9 @@ namespace Paginator
     /// <typeparam name="T"></typeparam>
     public class PagedResult<T> 
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public PagedResult()
         {
             Items = new HashSet<T>();
@@ -33,8 +36,8 @@ namespace Paginator
         /// </summary>
         public int ItemsPerPage { get; set; }
         /// <summary>
-        /// Number of pages used to paginate our <see cref="List"/> with
-        /// each page containing (x) <see cref="ItemsPerPage"/>
+        /// Number of pages used to paginate collection with
+        /// each page containing (x) items per page
         /// </summary>
         public int TotalPages { get; set; }
         /// <summary>
@@ -42,26 +45,25 @@ namespace Paginator
         /// </summary>
         public int TotalItems { get; set; }
         /// <summary>
-        /// Array containing items in the current page.
-        /// 
-        /// This property will be removed in a future release thus giving enough time
-        /// to migrate to using <see cref="Items"/>.
-        /// </summary>
-        [Obsolete("Use 'Items' property to get list of elements in the current page. [REASON]-Properties should not return arrays.",true)]
-        public T[] List { get; set; }
-        /// <summary>
         /// Collection containing items in the current page.
         /// </summary>
         public ICollection<T> Items { get; set; }
 
+        /// <summary>
+        /// Determines whether the specified object matches the current object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>true or false</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
-            
-            return obj.GetHashCode() == GetHashCode();
+            return this == (PagedResult<T>)obj;
         }
-
+        /// <summary>
+        /// Calculates &amp; returns the hashcode of the current object.
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
@@ -76,12 +78,22 @@ namespace Paginator
                 return hash;
             }
         }
-
-        public static bool operator ==(PagedResult<T> left, PagedResult<T> right)
+        /// <summary>
+        /// Determines whether this objects match.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator == (PagedResult<T> left, PagedResult<T> right)
         {
             return left.Equals(right);
         }
-
+        /// <summary>
+        /// Determines whether this two objects do not match.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(PagedResult<T> left, PagedResult<T> right)
         {
             return !(left == right);
