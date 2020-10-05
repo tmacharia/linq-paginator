@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Paginator
 {
@@ -50,17 +48,6 @@ namespace Paginator
         public ICollection<T> Items { get; set; }
 
         /// <summary>
-        /// Determines whether the specified object matches the current object.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns>true or false</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            return this == (PagedResult<T>)obj;
-        }
-        /// <summary>
         /// Calculates &amp; returns the hashcode of the current object.
         /// </summary>
         /// <returns></returns>
@@ -77,26 +64,6 @@ namespace Paginator
                 hash = hash * 23 + Items.GetHashCode();
                 return hash;
             }
-        }
-        /// <summary>
-        /// Determines whether this objects match.
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator == (PagedResult<T> left, PagedResult<T> right)
-        {
-            return left.Equals(right);
-        }
-        /// <summary>
-        /// Determines whether this two objects do not match.
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(PagedResult<T> left, PagedResult<T> right)
-        {
-            return !(left == right);
         }
     }
 }
