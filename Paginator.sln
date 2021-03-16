@@ -5,10 +5,11 @@ VisualStudioVersion = 16.0.29006.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paginator", "src\Paginator.csproj", "{372B4525-5399-4792-BBC7-33BB8897F191}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\TestCases.csproj", "{48A1CCEB-85F0-4091-8B9F-154D61AF1D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCases", "tests\TestCases.csproj", "{48A1CCEB-85F0-4091-8B9F-154D61AF1D5A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A9AA53E-5B35-419C-BBCA-C42DD98FBE71}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		_config.yml = _config.yml

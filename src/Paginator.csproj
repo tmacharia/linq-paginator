@@ -48,6 +48,7 @@
 
    <!--Conditionally obtain references for .NET Core 1.1 target--> 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
