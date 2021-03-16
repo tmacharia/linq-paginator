@@ -27,7 +27,7 @@
       - Items (collection of the first 20 records)
 </Description>
     <PackageId>LinqPaginator</PackageId>
-    <Version>1.2.6</Version>
+    <Version>1.2.7</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageReleaseNotes>
       Fixes bug/issue casting.
