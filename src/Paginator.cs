@@ -1,5 +1,4 @@
-﻿using Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -47,29 +46,32 @@ namespace Paginator
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="enumerable">The current collection.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Paginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static PagedResult<T> Paginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
             where T : class
-            => enumerable.ProcessPagination(predicate);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="perpage">Number of items per page.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Paginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+        public static PagedResult<T> Paginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
             int page = _page, int perpage = _perpage)
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
@@ -77,10 +79,10 @@ namespace Paginator
         /// <param name="orderBy">Property to order by</param>
         /// <param name="order">Ordering type e.g asc or desc</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Paginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
-            int page = _page, int perpage = _perpage, string orderBy = null, string order = "asc")
+        public static PagedResult<T> Paginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+            int page = _page, int perpage = _perpage, Func<T, TProperty> orderBy = null, string order = "asc")
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage, orderBy, order);
+            => enumerable.ProcessPagination2(predicate, page, perpage, orderBy, order);
         #endregion
 
         #region .Page Methods
@@ -109,29 +111,32 @@ namespace Paginator
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Page<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static PagedResult<T> Page<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
             where T : class
-            => enumerable.ProcessPagination(predicate);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="perpage">Number of items per page.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Page<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+        public static PagedResult<T> Page<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
             int page = _page, int perpage = _perpage)
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
@@ -139,10 +144,10 @@ namespace Paginator
         /// <param name="orderBy">Property to order by</param>
         /// <param name="order">Ordering type e.g asc or desc</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
-        public static PagedResult<T> Page<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
-            int page = _page, int perpage = _perpage, string orderBy = null, string order = "asc")
+        public static PagedResult<T> Page<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+            int page = _page, int perpage = _perpage, Func<T, TProperty> orderBy = null, string order = "asc")
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage, orderBy, order);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage, orderBy, order);
         #endregion
 
         #region .Paged Methods
@@ -173,31 +178,34 @@ namespace Paginator
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> Paged<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static PagedResult<T> Paged<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
             where T : class
-            => enumerable.ProcessPagination(predicate);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="perpage">Number of items per page.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> Paged<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+        public static PagedResult<T> Paged<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
             int page = _page, int perpage = _perpage)
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
@@ -206,10 +214,10 @@ namespace Paginator
         /// <param name="order">Ordering type e.g asc or desc</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> Paged<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
-            int page = _page, int perpage = _perpage, string orderBy = null, string order = "asc")
+        public static PagedResult<T> Paged<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+            int page = _page, int perpage = _perpage, Func<T, TProperty> orderBy = null, string order = "asc")
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage, orderBy, order);
+            => enumerable.ProcessPagination2(predicate, page, perpage, orderBy, order);
         #endregion
 
         #region .ToPages Methods
@@ -240,31 +248,34 @@ namespace Paginator
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPages<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static PagedResult<T> ToPages<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
             where T : class
-            => enumerable.ProcessPagination(predicate);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="perpage">Number of items per page.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPages<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+        public static PagedResult<T> ToPages<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
             int page = _page, int perpage = _perpage)
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
@@ -273,10 +284,10 @@ namespace Paginator
         /// <param name="order">Ordering type e.g asc or desc</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPages<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
-            int page = _page, int perpage = _perpage, string orderBy = null, string order = "asc")
+        public static PagedResult<T> ToPages<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+            int page = _page, int perpage = _perpage, Func<T, TProperty> orderBy = null, string order = "asc")
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage, orderBy, order);
+            => enumerable.ProcessPagination2(predicate, page, perpage, orderBy, order);
         #endregion
 
         #region .ToPaginate Methods
@@ -307,31 +318,34 @@ namespace Paginator
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPaginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        public static PagedResult<T> ToPaginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
             where T : class
-            => enumerable.ProcessPagination(predicate);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="perpage">Number of items per page.</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPaginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+        public static PagedResult<T> ToPaginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
             int page = _page, int perpage = _perpage)
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage);
+            => enumerable.ProcessPagination2<T, TProperty>(predicate, page, perpage);
         /// <summary>
         /// Paginate this collection into pages of (x) items each and returns only the first subset.
         /// </summary>
         /// <typeparam name="T">Type of entity in collection.</typeparam>
+        /// <typeparam name="TProperty">Type of the property to order by.</typeparam>
         /// <param name="enumerable">The current collection.</param>
         /// <param name="predicate">A filter to apply to the collection before pagination.</param>
         /// <param name="page">The page to retrieve.</param>
@@ -340,10 +354,10 @@ namespace Paginator
         /// <param name="order">Ordering type e.g asc or desc</param>
         /// <returns><see cref="PagedResult{T}"/>.</returns>
         [Obsolete("Use .Paginate instead")]
-        public static PagedResult<T> ToPaginate<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
-            int page = _page, int perpage = _perpage, string orderBy = null, string order = "asc")
+        public static PagedResult<T> ToPaginate<T, TProperty>(this IEnumerable<T> enumerable, Func<T, bool> predicate,
+            int page = _page, int perpage = _perpage, Func<T, TProperty> orderBy = null, string order = "asc")
             where T : class
-            => enumerable.ProcessPagination(predicate, page, perpage, orderBy, order);
+            => enumerable.ProcessPagination2(predicate, page, perpage, orderBy, order);
         #endregion
 
         #region IQueryable Methods
@@ -488,22 +502,21 @@ namespace Paginator
                 Items = list
             };
         }
-        internal static PagedResult<T> ProcessPagination<T>(this IEnumerable<T> enumerable,
-            Func<T, bool> predicate=null, int page = _page, int perpage = _perpage, string orderBy = null,
+        internal static PagedResult<T> ProcessPagination2<T, TProperty>(this IEnumerable<T> enumerable,
+            Func<T, bool> predicate=null, int page = _page, int perpage = _perpage, Func<T,TProperty> orderBy = null,
             string order = "asc") where T : class
         {
             int total = 0;
             IEnumerable<T> query;
 
             query = predicate != null ? enumerable.Where(predicate) : enumerable;
-            if (orderBy.IsValid())
-            {
-                query = order == "asc" ? query.OrderBy(x => x.GetPropertyValue<T, object>(orderBy)) :
-                       order == "desc" ? query.OrderByDescending(x => x.GetPropertyValue<T, object>(orderBy)) : query;
-            }
-
             total = query.CountItems();
 
+            if (orderBy != null)
+            {
+                query = order.Equals("asc", StringComparison.OrdinalIgnoreCase) ? query.OrderBy(orderBy) :
+                       order.Equals("desc", StringComparison.OrdinalIgnoreCase) ? query.OrderByDescending(orderBy) : query;
+            }
 
             PagedResult<T> result = new PagedResult<T>()
             {

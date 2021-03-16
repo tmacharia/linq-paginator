@@ -38,21 +38,12 @@ namespace Tests
         public void FuncTest(ICollection<Rate> Rates)
         {
             var result = Rates.AsQueryable()
-                              .Paged(x => x.Value > 9, 2, 2);
+                              .Paged(x => x.Value > 9, 2, 2, x => x.Value);
 
             Assert.NotNull(result);
             Assert.AreEqual(2, result.Page);
             Assert.AreEqual(2, result.ItemsPerPage);
             Assert.AreEqual(Rates.Count(x => x.Value > 9), result.TotalItems);
-        }
-
-        [Test, TestCaseSource(typeof(Seed), "Pages")]
-        public void NullRequestTest(ICollection<Rate> list)
-        {
-            var result = list.AsQueryable()
-                             .ToPages(null);
-
-            Assert.AreEqual(1, result.Page);
         }
     }
 }

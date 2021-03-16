@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Paginator;
 using System.Linq;
-using System;
-using Common;
 
 namespace Tests
 {
@@ -41,8 +39,8 @@ namespace Tests
         public void FuncTest(ICollection<string> nums)
         {
             int perpage = 5;
-            
-            var result = nums.Paged(x => x.Matches("0"), 2, perpage);
+
+            var result = nums.Paged(x => x.Equals("0"), 2, perpage, x => x);
             int pages = GetPages(result.TotalItems, perpage);
 
             Assert.AreEqual(2, result.Page);
@@ -53,24 +51,12 @@ namespace Tests
         [Test, TestCaseSource(typeof(Seed), "Pages")]
         public void OrderByProperty(ICollection<Rate> Rates)
         {
-            var result = Rates.ToPaginate(null, 1, 10, "Value", "desc");
+            var result = Rates.ToPaginate(null, 1, 10, x=>x.Value, "desc");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Page);
             Assert.AreEqual(Rates.Count, result.TotalItems);
             Assert.Greater(result.Items.First().Value, result.Items.Last().Value);
-            result.Items.ForEach(x =>
-            {
-                Console.WriteLine(x.Value);
-            });
-        }
-
-        [Test, TestCaseSource(typeof(Seed), "Pages")]
-        public void NullRequestTest(ICollection<Rate> list)
-        {
-            var result = list.ToPages(null);
-
-            Assert.AreEqual(1, result.Page);
         }
     }
 }
