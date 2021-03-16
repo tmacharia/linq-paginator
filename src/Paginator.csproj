@@ -5,7 +5,8 @@
     <TargetFrameworks>
       netstandard2.0;
       netcoreapp3.0;netcoreapp2.0;netcoreapp2.1;
-      net47
+      <!--net47,-->
+	  net48
     </TargetFrameworks>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,19 +19,18 @@
     <RepositoryUrl>https://github.com/tmacharia/linq-paginator</RepositoryUrl>
     <PackageTags>linq, pagination, list paginator, paging, list, array, collection</PackageTags>
     <Description>For queries that return a lot of data, a need emerges to consume the results in chunks rather than the entire set. Consuming all results at once can be costly in terms of network traffic thus slowing down your application.
-      Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
+    Linq Paginator allows you to run your queries and return your data in form of pages. A page contains a set number of items to return per page e.g 20. If for example you have 100 records, it will return the following object:
       - Page: 1,
       - TotalPages: 5,
       - ItemsPerPage: 20,
       - TotalItems: 100,
-      - List (collection of the first 20 records)
+      - Items (collection of the first 20 records)
 </Description>
     <PackageId>LinqPaginator</PackageId>
-    <Version>1.2.6</Version>
+    <Version>1.2.7</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageReleaseNotes>
-      Fixes bug/issue with pagination result:
-      -&gt; TotalPages is always zero
+      Fixes bug/issue casting.
     </PackageReleaseNotes>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -42,12 +42,9 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>-->
 
-  <ItemGroup>
-    <PackageReference Include="Shared.Common" Version="1.3.5" />
-  </ItemGroup>
-
    <!--Conditionally obtain references for .NET Core 1.1 target--> 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
