@@ -22,7 +22,7 @@ namespace Paginator
         /// </summary>
         public PagedResult()
         {
-            Items = new HashSet<T>();
+            Items = new List<T>();
         }
         /// <summary>
         /// Current page in pagination
@@ -45,7 +45,7 @@ namespace Paginator
         /// <summary>
         /// Collection containing items in the current page.
         /// </summary>
-        public ICollection<T> Items { get; set; }
+        public IList<T> Items { get; set; }
 
         /// <summary>
         /// Calculates &amp; returns the hashcode of the current object.
